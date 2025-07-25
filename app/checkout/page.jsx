@@ -432,7 +432,7 @@ useEffect(() => {
                       width="14"
                       height="14"
                       className="ml-2 mr-2 myBB"
-                      fill="#A59E98"
+                      fill="#3d3d3a"
                     >
                       <path
                         className="st0 myBB"
@@ -445,7 +445,7 @@ useEffect(() => {
                       width="14"
                       height="14"
                       className="ml-2 mr-2 myBB rotate-180"
-                      fill="#A59E98"
+                      fill="#3d3d3a"
                     >
                       <path
                         className="st0 myBB"

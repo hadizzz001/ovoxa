@@ -1,121 +1,125 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import CarCard from './CarCard'; // Ensure this component exists
+import CarCard from './CarCard';
 import { useRouter } from "next/navigation";
+import { motion } from 'framer-motion';
 
 const YourComponent = () => {
-    const [allTemps, setAllTemps] = useState(); // Stores products per category
-    const router = useRouter();
-    useEffect(() => {
-        fetchCategories();
-    }, []);
+  const [allTemps, setAllTemps] = useState([]);
+  const router = useRouter();
 
-const fetchCategories = async () => {
-  try {
-    const response = await fetch('/api/products5', { cache: 'no-store' });
-    if (response.ok) {
-      const data = await response.json();
-      setAllTemps(data.slice(0, 10));  // take only first 10 products
-    } else {
-      console.error('Failed to fetch categories');
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch('/api/products', { cache: 'no-store' });
+      if (response.ok) {
+        const data = await response.json();
+        setAllTemps(data.slice(0, 4)); // Get only the first 4
+      } else {
+        console.error('Failed to fetch categories');
+      }
+    } catch (error) {
+      console.error('Error fetching categories:', error);
     }
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
-};
+  };
 
+  return (
+    <div className="ProvidersIfSelectedProductMatchesFilter mt-4">
+      <content-block slug="product-page-wssb">
+        <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
+          <style>{`
+            /* Ensure swiper slides don't shrink and have margin for spacing */
+            .swiper-slide {
+              flex-shrink: 0 !important;
+              margin-right: 12px; /* fallback margin for gap */
+              box-sizing: border-box;
+            }
 
+            /* Remove last slide margin-right */
+            .swiper-slide:last-child {
+              margin-right: 0;
+            }
+          `}</style>
 
+          {allTemps && allTemps.length > 0 ? (
+            <>
+              <style
+                dangerouslySetInnerHTML={{
+                  __html:
+                    ".ProductTile-SliderContainer--YMAL .ProductTile-SliderContainer-Title{height:auto;text-align:center;}",
+                }}
+              />
 
+              <div data-product-list-category="ymal-slider">
+                <div className="padforcat">
+                  <h1
+                    onClick={() => router.push("/shop")}
+                    className="myntit mb-3 sm:mb-5"
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Best sellers
+                  </h1>
 
-
-    return (
-        <div className="ProvidersIfSelectedProductMatchesFilter mt-4">
-
-            <content-block slug="product-page-wssb">
-                <div className="ProductTile-SliderContainer ProductTile-SliderContainer--YMAL">
-
-                    {allTemps && Object.keys(allTemps).length > 0 ? (
-
-                        <>
-
-                            <style dangerouslySetInnerHTML={{
-                                __html: ".ProductTile-SliderContainer--YMAL .ProductTile-SliderContainer-Title{height:auto;text-align:center; }  "
-                            }} />
-
-
-
-
-
-
-                            <div className="  ProductTile-SliderContainer ProductTile-SliderContainer--YMAL px-3" data-product-list-category="ymal-slider">
-
-                                <div className="flex items-center justify-between w-full">
-                                    <h1 className="py-2 leading-[0rem] font-stretch-[66.66%] not-italic tracking-widest uppercase text-[#222] transition text-nowrap font-bold text-[16px] myGray">
-                                        New Arrivals
-                                    </h1>
-                                    <button
-                                        id='mybbtn'
-                                        className='myGray  '
-                                        onClick={() => router.push("/search?cat=yes")}
-                                    >
-                                        Shop All
-                                    </button>
-                                </div>
-                                <div className="w-[70px] h-[5px] bg-[#A59E98] mt-1 mb-5"></div>
-
-
-
-
-
-
-                                {allTemps.length > 0 ? (
-                                    <section className=' mb-5' style={{ maxWidth: "100%" }}>
-                                        <Swiper
-                                            modules={[Autoplay]} // Include Autoplay module
-                                            spaceBetween={20}
-                                            loop={true} // Enable looping
-                                            autoplay={{
-                                                delay: 2000, // 2 seconds delay
-                                                disableOnInteraction: false, // Keeps autoplay even after interaction
-                                            }}
-                                            breakpoints={{
-                                                150: {
-                                                    slidesPerView: 2,
-                                                },
-                                                768: {
-                                                    slidesPerView: 4,
-                                                },
-                                            }}
-                                        >
-                                            {allTemps.map((temp) => (
-                                                <SwiperSlide key={temp.id}>
-                                                    <CarCard temp={temp} />
-                                                </SwiperSlide>
-                                            ))}
-                                        </Swiper>
-                                    </section>
-
-
-
-                                ) : (
-                                    <p>No products available in {category}</p>
-                                )}
-                            </div>
-                        </>
-
-                    ) : (
-                        <div className="home___error-container">
-                            <h2 className="text-black text-xl font-bold">No products available</h2>
-                        </div>
-                    )}
+                  <section className="mb-5" style={{ maxWidth: "100%" }}>
+                    <Swiper
+                      modules={[Autoplay]}
+                      loop={true} 
+                      breakpoints={{
+                        150: {
+                          slidesPerView: 1,
+                          spaceBetween: 0, // smaller gap on mobile
+                        },
+                        768: {
+                          slidesPerView: 4,
+                          spaceBetween: 24, // medium gap on tablets
+                        },
+                        1024: {
+                          slidesPerView: 4,
+                          spaceBetween: 40, // larger gap on desktop
+                        },
+                      }}
+                      spaceBetween={20} // fallback default gap
+                    >
+                      {allTemps.map((temp, index) => (
+                        <SwiperSlide key={temp.id} style={{ padding: '0' }}>
+                          <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{
+                              duration: 0.6,
+                              delay: index * 0.3,
+                              ease: "easeOut",
+                            }}
+                            style={{ padding: '0.5rem' }}
+                          >
+                            <CarCard temp={temp} />
+                          </motion.div>
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  </section>
                 </div>
-
-            </content-block>
+              </div>
+            </>
+          ) : (
+            <div className="home___error-container">
+              <h2 className="text-black text-xl font-bold">
+                No products available
+              </h2>
+            </div>
+          )}
         </div>
-    );
+      </content-block>
+    </div>
+  );
 };
 
 export default YourComponent;

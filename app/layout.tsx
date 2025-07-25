@@ -134,7 +134,7 @@ export default function RootLayout({
 
       </>
 
-      <body>
+      <body >
 
         <Offer />
         <GifLoader />

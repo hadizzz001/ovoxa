@@ -68,9 +68,9 @@ const Body = () => {
 
         <header className="br_text-white  br_p-3 br_pt-11 md:br_py-20 br_flex md:br_justify-center">
           <div className="br_text-left md:br_max-w-[600px] lg:br_max-w-[800px] md:br_text-center br_flex br_flex-col br_gap-2  md:br_gap-4 md:br_items-center">
-            <h1 className="myGray br_text-3xl-serif md:br_text-4xl-serif initial:br_text-white">
+            <p className="br_text-base-sans-stretched md:br_text-lg-sans-stretched myGray">
               Are you looking for one of these?
-            </h1>
+            </p>
           </div>
         </header>
         <div className="br_flex">
@@ -137,10 +137,10 @@ const Body = () => {
                                 style={{ textAlign: "center" }}
                                 className="initial:br_row-span-1 br_col-start-1 br_row-start-2 br_px-3 group-[.centered]/tile:br_justify-center group-[.centered]/tile:br_text-center"
                               >
-                                <h3 className="myNewC br_text-base-sans-spaced br_line-clamp-2 sm:br_line-clamp-none edition:br_text-grey-500 edition:br_hidden first:edition:br_inline edition:before:br_content-['_–_'] apex:edition:br_text-grey-300">
+                                <h3 className="myPrice1">
                                   <a
                                     href={`/product?id=${item._id}`}
-                                    className="br_text-current br_no-underline myGray"
+                                    className=" "
                                     id="anchorNew"
                                   >
                                     {item.title}
@@ -157,7 +157,7 @@ const Body = () => {
                                     )}
 
                                   </span>
-                                  <span className="font-light text-[13px] py-1 rounded myRed float-left">
+                                  <span className="myPrice">
                                     {/* ${parseFloat(item.discount).toFixed(2)} */}
                                     {item.type === 'single' || (item.type === 'collection' && !item.color)
                                       ? (`$${item.discount}` || 'N/A')
@@ -179,10 +179,7 @@ const Body = () => {
                                         })()
                                         : `$${item.discount}`
                                       )
-                                    }
-                                    <span className="ml-1 text-xs">
-                                      {Math.round(((item.price - item.discount) / item.price) * 100)}% off
-                                    </span>
+                                    } 
                                   </span>
                                 </div>
                                 <br />
@@ -230,7 +227,7 @@ const Body = () => {
                   style={{
                     width: '30px',
                     height: '30px',
-                    backgroundColor: '#A59E98',
+                    backgroundColor: '#3d3d3a',
                     borderRadius: '50%',
                   }}
                 >

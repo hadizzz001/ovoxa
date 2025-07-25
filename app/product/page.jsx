@@ -244,11 +244,11 @@ const Page = () => {
                 </section>
                 <section className="ProductSelector">
                   <span className="ProvidersSingleProduct--selected">
-                    <h1 className='myGray'>
+                    <h1 className='myntit'>
                       {title}
                       <span className="ProductSelector_EditionLabel" style={{ margin: "0 0 0 3px" }} />
                     </h1>
-                    <p className='mb-2 myGray'>
+                    <p className='myPrice'>
                       Category: {cat}
                     </p>
 
@@ -349,24 +349,18 @@ const Page = () => {
                           </h1>
 
                           <h1 className="mb-2 myRed font-bold text-lg">
-                            ${displayedPrice}
-                            <span className="ml-1 text-sm">
-                             {Math.round(((price - discount) / price) * 100)}% off
-                            </span>
+                            ${displayedPrice} 
                           </h1>
                         </div>
                       ) : (
                         <></>
                       )
                     ) : (
-                      <div className="flex items-center space-x-2">
-                        <h1 className="mb-2 myGray line-through font-bold text-lg">${parseFloat(price).toFixed(2)}</h1>
-                        <h1 className="mb-2 myRed font-bold text-lg">
-                          ${discount}
-                          <span className="ml-1 text-sm">
-                          {Math.round(((price - discount) / price) * 100)}% off
-                          </span>
-                        </h1>
+                      <div className="flex items-center space-x-2 mb-3">
+                        <p className="font-light text-[13px] py-1 line-through text-gray-400 float-left">${parseFloat(price).toFixed(2)}</p>
+                        <p className="br_text-base-sans-stretched md:br_text-lg-sans-stretched myGray">
+                          ${discount} 
+                        </p>
                       </div>
                     )}
 
@@ -430,7 +424,7 @@ const Page = () => {
                         </form>
                     <span className="ProvidersIfSelectedProductMatchesFilter">
                       <p
-                        className='myGray'
+                        className='br_text-base-sans-stretched md:br_text-lg-sans-stretched myGray'
                         dangerouslySetInnerHTML={{ __html: desc }}
                       /><br />
                     </span>
